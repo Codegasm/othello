@@ -7,6 +7,7 @@ public class Player extends Observable {
   private PieceColor color;
   private String name;
   private int score;
+  private boolean active;
   
   public Player(PieceColor color, String name) {
     this.color = color;
@@ -27,6 +28,17 @@ public class Player extends Observable {
   
   public int getScore() {
     return score;
+  }
+  
+  public void setActive(boolean active) {
+    this.active = active;
+    
+    setChanged();
+    notifyObservers();
+  }
+  
+  public boolean isActive() {
+    return active;
   }
   
   public PieceColor getColor() {

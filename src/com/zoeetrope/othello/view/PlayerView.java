@@ -1,5 +1,6 @@
 package com.zoeetrope.othello.view;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,6 +31,13 @@ public class PlayerView extends JPanel implements Observer {
   public void paint(Graphics g) {
     super.paint(g);
     
+    int style = Font.PLAIN;
+    
+    if(player.isActive()) {
+      style = Font.BOLD;
+    }
+    
+    g.setFont(new Font("Arial", style, 12));
     g.drawString(player.getName(), 20, 20);
     g.drawString("Score: " + player.getScore(), 20, 35);
   }

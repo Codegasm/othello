@@ -1,5 +1,6 @@
 package com.zoeetrope.othello.view;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,7 +18,7 @@ public class OthelloWindow extends JFrame implements Observer {
   private Othello othello;
   private BoardView boardView;
   
-  public OthelloWindow(Othello othello) {
+  public OthelloWindow(Othello othello, ActionListener listener) {
     this.othello = othello;
     this.playerViews = new ArrayList<PlayerView>();
     this.boardView = new BoardView(this.othello.getBoard());
@@ -28,6 +29,7 @@ public class OthelloWindow extends JFrame implements Observer {
     getContentPane().setLayout(null);
     
     boardView.setBounds(10, 110, 400, 400);
+    boardView.addActionListener(listener);
     getContentPane().add(boardView);
   }
 
@@ -38,6 +40,10 @@ public class OthelloWindow extends JFrame implements Observer {
     if(o instanceof Othello && arg instanceof Player) {
       System.out.println(((Player) arg).getName());
       addPlayerView((Player)arg);
+    }
+    
+    for(PlayerView pv : playerViews) {
+      pv.repaint();
     }
   }
   
