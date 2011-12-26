@@ -23,6 +23,10 @@ public class Piece {
     this(PieceColor.BLACK, x, y);
   }
   
+  public Piece() {
+    this(PieceColor.BLACK);
+  }
+  
   public void setLocation(int x, int y) {
     this.x = x;
     this.y = y;
@@ -122,7 +126,7 @@ public class Piece {
     if(o instanceof Piece) {
       Piece p = (Piece)o;
       
-      if(p.getX() == getX() && p.getY() == getY()) {
+      if(p.getX() == getX() && p.getY() == getY() && p.getColor() == getColor()) {
         return true;
       }
     }
