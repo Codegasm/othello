@@ -45,7 +45,6 @@ public class PlayerTest {
     testPlayer.addObserver(new Observer() {
       @Override
       public void update(Observable o, Object arg) {
-        System.out.println("Active observer");
         assertEquals(Player.class, o.getClass());
         assertEquals(true, ((Player)o).isActive());
       }

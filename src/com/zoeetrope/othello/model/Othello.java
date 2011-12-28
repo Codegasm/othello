@@ -55,12 +55,20 @@ public class Othello extends Observable implements Observer {
     return this.players;
   }
   
+  public GameState getGameState() {
+    return this.state;
+  }
+  
   public Board getBoard() {
     return board;
   }
   
   public Piece getNextPiece() {
-    return new Piece(currentPlayer.getColor());
+    if(state == GameState.DURING) {
+      return new Piece(currentPlayer.getColor());
+    } else {
+      return null;
+    }
   }
 
   @Override
@@ -85,7 +93,6 @@ public class Othello extends Observable implements Observer {
   }
   
   private void switchPlayer() {
-    System.out.println("switch player");
     // This ugly construct serves to switch the current player.
     for(Player p : players) {
       if(currentPlayer != p) {
