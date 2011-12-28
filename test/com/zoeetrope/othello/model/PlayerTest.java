@@ -26,7 +26,6 @@ public class PlayerTest {
   @Test
   public void testScore() {
     assertEquals(0, testPlayer.getScore());
-    testPlayer.setScore(2);
     
     testPlayer.addObserver(new Observer() {
       @Override
@@ -35,20 +34,24 @@ public class PlayerTest {
         assertEquals(2, ((Player)o).getScore());
       }
     });
+    
+    testPlayer.setScore(2);
   }
   
   @Test
   public void testActive() {
     assertEquals(false, testPlayer.isActive());
-    testPlayer.setActive(true);
     
     testPlayer.addObserver(new Observer() {
       @Override
       public void update(Observable o, Object arg) {
+        System.out.println("Active observer");
         assertEquals(Player.class, o.getClass());
         assertEquals(true, ((Player)o).isActive());
       }
     });
+    
+    testPlayer.setActive(true);
   }
 
 }
