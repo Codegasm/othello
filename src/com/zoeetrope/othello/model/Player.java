@@ -14,6 +14,10 @@ public class Player extends Observable {
     this.name = name;
     this.score = 0;
   }
+  
+  public Player(String name) {
+    this(PieceColor.BLACK, name);
+  }
 
   public String getName() {
     return name;
@@ -39,6 +43,10 @@ public class Player extends Observable {
   
   public boolean isActive() {
     return active;
+  }
+  
+  public void setColor(PieceColor color) {
+    this.color = color;
   }
   
   public PieceColor getColor() {

@@ -20,29 +20,45 @@ public class Othello extends Observable implements Observer {
   }
   
   public void startGame() {
-    // TODO: Check that we have two players.
-    
-    board.addPiece(new Piece(PieceColor.BLACK, 3, 3));
-    board.addPiece(new Piece(PieceColor.BLACK, 4, 4));
-    board.addPiece(new Piece(PieceColor.WHITE, 3, 4));
-    board.addPiece(new Piece(PieceColor.WHITE, 4, 3));
-    
-    for(Player p : players) {
-      p.setScore(2);
+    if(players.size() == 2) {
+      board.addPiece(new Piece(PieceColor.BLACK, 3, 3));
+      board.addPiece(new Piece(PieceColor.BLACK, 4, 4));
+      board.addPiece(new Piece(PieceColor.WHITE, 3, 4));
+      board.addPiece(new Piece(PieceColor.WHITE, 4, 3));
+      
+      for(Player p : players) {
+        p.setScore(2);
+      }
+      
+      currentPlayer = players.get(0);
+      currentPlayer.setActive(true);
+      
+      state = GameState.DURING;
+      
+      setChanged();
+      notifyObservers();
     }
+  }
+  
+  public void clearGame() {
+    this.players.clear();
+    this.board.clear();
     
-    currentPlayer = players.get(0);
-    currentPlayer.setActive(true);
-    
-    state = GameState.DURING;
+    this.state = GameState.BEFORE;
     
     setChanged();
-    notifyObservers();
+    notifyObservers("clearGame");
   }
   
   public void addPlayer(Player player) {
     if(state == GameState.BEFORE) {
       if(players.size() < 2) {
+        if(players.size() == 0) {
+          player.setColor(PieceColor.BLACK);
+        } else {
+          player.setColor(PieceColor.WHITE);
+        }
+        
         players.add(player);
         
         setChanged();
@@ -108,4 +124,5 @@ public class Othello extends Observable implements Observer {
       p.setActive(p == currentPlayer);
     }
   }
+
 }

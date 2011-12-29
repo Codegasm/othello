@@ -40,6 +40,10 @@ public class BoardView extends JPanel implements Observer, MouseListener {
       PieceView v = new PieceView((Piece)arg, this);
       add(v);
       revalidate();
+    } if(arg instanceof String && arg.equals("clearGame")) {
+      pieceViews.clear();
+      removeAll();
+      revalidate();
     }
     
     repaint();
@@ -68,7 +72,6 @@ public class BoardView extends JPanel implements Observer, MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-//    board.addPiece(new Piece(PieceColor.BLACK, 4, 2));
     int cellSize = getCellSize();
     int x = e.getX() / cellSize;
     int y = e.getY() / cellSize;

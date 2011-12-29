@@ -60,6 +60,13 @@ public class Board extends Observable {
     notifyObservers();
   }
   
+  public void clear() {
+    this.pieces = new Piece[8][8];
+    
+    setChanged();
+    notifyObservers("clearGame");
+  }
+  
   public void makeMove(Piece piece) {
     if(validMove(piece)) {
       ArrayList<Piece> captured = piece.getCapturedPieces(this);
@@ -135,5 +142,5 @@ public class Board extends Observable {
     
     return true;
   }
-  
+
 }

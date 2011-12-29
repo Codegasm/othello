@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
 import com.zoeetrope.othello.model.Othello;
 import com.zoeetrope.othello.model.Player;
@@ -19,14 +20,19 @@ public class OthelloWindow extends JFrame implements Observer {
   private BoardView boardView;
   
   public OthelloWindow(Othello othello, ActionListener listener) {
+    super("Othello");
+    
     this.othello = othello;
     this.playerViews = new ArrayList<PlayerView>();
     this.boardView = new BoardView(this.othello.getBoard());
     
-    setSize(420, 550);
+    setSize(420, 570);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setVisible(true);
     getContentPane().setLayout(null);
+    
+    JMenuBar menuBar = new OthelloMenuBar(listener);
+    setJMenuBar(menuBar);
     
     boardView.setBounds(10, 110, 400, 400);
     boardView.addActionListener(listener);
@@ -35,11 +41,15 @@ public class OthelloWindow extends JFrame implements Observer {
 
   @Override
   public void update(Observable o, Object arg) {
-    System.out.println("OthelloWindow update");
-    
     if(o instanceof Othello && arg instanceof Player) {
-      System.out.println(((Player) arg).getName());
       addPlayerView((Player)arg);
+    } else if(o instanceof Othello && arg instanceof String && arg.equals("clearGame")) {
+      for(PlayerView pv : playerViews) {
+        remove(pv);
+      }
+      
+      playerViews.clear();
+      validate();
     }
     
     for(PlayerView pv : playerViews) {
