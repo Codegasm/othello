@@ -118,11 +118,18 @@ public class Othello extends Observable implements Observer {
     }
   }
   
+  public Player getCurrentPlayer() {
+    return this.currentPlayer;
+  }
+  
   private void updateScores() {
     for(Player p : players) {
       p.setScore(board.getPieceCount(p.getColor()));
       p.setActive(p == currentPlayer);
     }
+    
+    setChanged();
+    notifyObservers();
   }
 
 }
