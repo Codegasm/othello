@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import com.zoeetrope.othello.ai.ImpossibleAI;
 import com.zoeetrope.othello.ai.OthelloAI;
 import com.zoeetrope.othello.ai.RandomAI;
 import com.zoeetrope.othello.model.Othello;
@@ -69,6 +70,9 @@ public class OthelloGame implements ActionListener {
     
     if(dialog.getType().equals("Random CPU")) {
       RandomAI cpu = new RandomAI(player, this.othello);
+      this.ais.add(cpu);
+    } else if(dialog.getType().equals("Impossible CPU")) {
+      ImpossibleAI cpu = new ImpossibleAI(player, this.othello);
       this.ais.add(cpu);
     }
     

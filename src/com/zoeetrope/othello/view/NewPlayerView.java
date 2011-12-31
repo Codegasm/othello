@@ -12,7 +12,7 @@ public class NewPlayerView {
   private JComboBox typeField;
   
   public NewPlayerView() {
-    String[] availableTypes = {"Human", "Random CPU"};
+    String[] availableTypes = {"Human", "Random CPU", "Impossible CPU"};
     typeField = new JComboBox(availableTypes);
     
     inputs = new JComponent[] {

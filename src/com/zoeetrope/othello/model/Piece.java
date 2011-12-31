@@ -27,6 +27,14 @@ public class Piece {
     this(PieceColor.BLACK);
   }
   
+  public Piece(Piece piece) {
+    this(piece.getColor(), piece.getX(), piece.getY());
+  }
+  
+  public Piece getDeepCopy() {
+    return new Piece(this);
+  }
+  
   public void setLocation(int x, int y) {
     this.x = x;
     this.y = y;

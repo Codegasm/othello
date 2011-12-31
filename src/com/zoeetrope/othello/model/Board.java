@@ -1,6 +1,7 @@
 package com.zoeetrope.othello.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 
 public class Board extends Observable {
@@ -9,6 +10,26 @@ public class Board extends Observable {
   
   public Board() {
     this.pieces = new Piece[8][8];
+  }
+  
+  public Board(Piece[][] pieces) {
+    this.pieces = pieces;
+  }
+  
+  public Board getDeepCopy() {
+    Piece[][] piecesCopy = new Piece[8][8];
+    
+    for(int x = 0; x < pieces.length; x++) {
+      Piece[] row = pieces[x];
+      
+      for(int y = 0; y < row.length; y++) {
+        if(row[y] != null) {
+          piecesCopy[x][y] = row[y].getDeepCopy();
+        }
+      }
+    }
+    
+    return new Board(piecesCopy);
   }
   
   public int getPieceCount(PieceColor color) {
