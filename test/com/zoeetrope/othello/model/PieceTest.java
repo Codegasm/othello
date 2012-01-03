@@ -1,6 +1,6 @@
 package com.zoeetrope.othello.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -38,6 +38,7 @@ public class PieceTest {
     assertEquals(PieceColor.WHITE, piece3.getColor());
   }
   
+  @Test
   public void testLocation() {
     Piece testPiece = new Piece(PieceColor.BLACK);
     
@@ -50,6 +51,7 @@ public class PieceTest {
     assertEquals(2, testPiece.getY());
   }
   
+  @Test
   public void testGetEmptyNeighbors() {
     testBoard.addPiece(piece1);
     testBoard.addPiece(piece2);
@@ -60,6 +62,7 @@ public class PieceTest {
     assertEquals(5, emptySpots.size());
   }
   
+  @Test
   public void testGetOpposingNeighbors() {
     Piece testPiece = new Piece(PieceColor.BLACK, 2, 4);
     
@@ -70,9 +73,10 @@ public class PieceTest {
     
     ArrayList<Piece> emptySpots = testPiece.getOpposingNeighbors(testBoard);
     assertEquals(1, emptySpots.size());
-    assertEquals(piece3, emptySpots.get(0));
+    assertEquals(piece4, emptySpots.get(0));
   }
   
+  @Test
   public void testGetCapturedPieces() {
     Piece testPiece = new Piece(PieceColor.BLACK, 2, 4);
     
@@ -83,9 +87,10 @@ public class PieceTest {
     
     ArrayList<Piece> capturedPieces = testPiece.getCapturedPieces(testBoard);
     assertEquals(1, capturedPieces.size());
-    assertEquals(piece3, capturedPieces.get(0));
+    assertTrue(piece4.equals(capturedPieces.get(0)));
   }
   
+  @Test
   public void testEquals() {
     Piece testPiece = new Piece(PieceColor.BLACK, 3, 3);
     

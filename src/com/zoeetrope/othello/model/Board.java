@@ -1,7 +1,7 @@
 package com.zoeetrope.othello.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Observable;
 
 public class Board extends Observable {
@@ -133,6 +133,7 @@ public class Board extends Observable {
   }
   
   public ArrayList<Piece> getValidMoves(PieceColor color) {
+    HashSet<Piece> moveSet = new HashSet<Piece>();
     ArrayList<Piece> moves = new ArrayList<Piece>();
     ArrayList<Piece> opposingPieces = getPieces(color.getOpposite());
     
@@ -141,11 +142,12 @@ public class Board extends Observable {
       for(Piece free : freeNeighbors) {
         free.setColor(color);
         if(free.getCapturedPieces(this).size() > 0) {
-          moves.add(free);
+          moveSet.add(free);
         }
       }
     }
     
+    moves.addAll(moveSet);
     return moves;
   }
   

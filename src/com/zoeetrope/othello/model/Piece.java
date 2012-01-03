@@ -142,4 +142,14 @@ public class Piece {
     return false;
   }
   
+  @Override
+  public int hashCode() {
+    return getX() + getY() + getColor().ordinal();
+  }
+  
+  @Override
+  public String toString() {
+    return "x:" + getX() + " y:" + getY() + " color:" + getColor();
+  }
+  
 }
