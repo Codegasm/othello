@@ -37,6 +37,9 @@ public class OthelloWindow extends JFrame implements Observer {
     boardView.setBounds(10, 110, 400, 400);
     boardView.addActionListener(listener);
     getContentPane().add(boardView);
+    
+    getRootPane().revalidate();
+    getContentPane().repaint();
   }
 
   @Override
