@@ -49,7 +49,7 @@ public class OthelloGame implements ActionListener {
       clearAIs();
       
       Player player1 = getNewPlayer("Player 1");
-      Player player2 = getNewPlayer("Player 1");
+      Player player2 = getNewPlayer("Player 2");
       
       this.othello.clearGame();
       this.othello.addPlayer(player1);
